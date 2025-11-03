@@ -1,0 +1,15 @@
+{% extends "notes/base.html" %}
+{% block container %}
+    {% if object %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ object.title }}</h5>
+                <!-- <h6 class="card-subtitle mb-2 text-muted">{{ object.created_at }}</h6> -->
+                <p class="card-text">{{ object.content }}</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">{{ object.created_at }}</small>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

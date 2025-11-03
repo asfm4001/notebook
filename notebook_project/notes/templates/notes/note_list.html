@@ -1,0 +1,10 @@
+{% extends "notes/base.html" %}
+{% block container %}
+    {% if note_list %}
+        <div class="list-group">
+            {% for note in note_list %}
+                <a href="{% url 'note:detail' note.pk %}" class="list-group-item list-group-item-action">{{ note.title }}</a>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
