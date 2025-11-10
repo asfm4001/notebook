@@ -24,7 +24,8 @@ class NoteDetailView(generic.DetailView):
 
 class NoteCreateView(generic.CreateView):
     model = Note
-    fields = ["title", "content"]
+    # fields = ["title", "content"]
+    form_class = NoteForm
     # template_name = "create_note_form.html"
     success_url = reverse_lazy('note:list')
     def get_context_data(self, **kwargs):
