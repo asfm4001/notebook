@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'notes.apps.NotesConfig',
+    'users.apps.UsersConfig',
     # django-crospy-forms
     'crispy_forms',
     'crispy_bootstrap4',
@@ -107,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hant'
 
 TIME_ZONE = 'Asia/Taipei'
 
@@ -129,3 +130,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # django-crospy-forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+# django-login
+from django.urls import reverse_lazy
+LOGIN_URL = reverse_lazy("users:login")
+LOGOUT_REDIRECT_URL = reverse_lazy("users:login")
+LOGIN_REDIRECT_URL = reverse_lazy("note:list")
