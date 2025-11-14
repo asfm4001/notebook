@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -53,6 +54,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+MIDDLEWARE += [
+    'users.middleware.SampleMiddleware',
 ]
 
 ROOT_URLCONF = 'notebook_project.urls'
@@ -136,3 +140,45 @@ from django.urls import reverse_lazy
 LOGIN_URL = reverse_lazy("users:login")
 LOGOUT_REDIRECT_URL = reverse_lazy("users:login")
 LOGIN_REDIRECT_URL = reverse_lazy("note:list")
+
+# loggin settings
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,  # 不要覆蓋 Django 內建的 loggers
+    'formatters': {
+        'verbose': {
+            'format': '[{asctime}] {levelname} [{name}] {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname}: {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        # 終端機
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        # log檔
+        'file': {
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'django.log'),
+            'when': 'midnight',  # 每天凌晨自動切換新檔案
+            'backupCount': 7,  # 保留7天
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {  # Django 系統用 log
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        '': {  # 根 logger (所有未特別設定的 app 都走這裡)
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+        },
+    },
+}

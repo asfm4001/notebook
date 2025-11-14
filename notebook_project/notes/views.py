@@ -4,7 +4,7 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from notes.models import Note
 from notes.forms import NoteForm
-# Create your views here.
+
 class NoteListView(LoginRequiredMixin, generic.ListView):
     model = Note
     def get_queryset(self):
