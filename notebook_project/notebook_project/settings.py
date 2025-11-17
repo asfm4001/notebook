@@ -40,10 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'notes.apps.NotesConfig',
     'users.apps.UsersConfig',
+    'api_v1.apps.ApiV1Config',
     # django-crospy-forms
     'crispy_forms',
     'crispy_bootstrap4',
-    
+    'rest_framework',           # turn Model to Json
+    'rest_framework.authtoken', # token
 ]
 
 MIDDLEWARE = [
@@ -181,4 +183,19 @@ LOGGING = {
             'level': 'INFO',
         },
     },
+}
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ]
+}
+
+# rest-framework-simple-JWT setting
+from datetime import timedelta
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": True,
 }
