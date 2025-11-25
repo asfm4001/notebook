@@ -118,14 +118,28 @@ Features為ChatGPT生成內容，開發中除了基礎功能外，額外學習�
 
 ## 📦 Installation & Run
 1️⃣ 下載專案
-`git clone https://github.com/asfm4001/notebook.git`
+```
+git clone https://github.com/asfm4001/notebook.git
+```
 
 2️⃣ 建立env & 安裝套件
-1. `python3 venv -m .venv`
-2. `pip install -r requirements.txt`
+1. 建立虛擬環境
+   ```
+   python3 venv -m .venv
+   ```
+2. 進入虛擬環境
+   ```
+   source .venv/bin/activate
+   ```
+3. 安裝套件
+   ```
+   pip install -r requirements.txt
+   ```
 
 3️⃣ 啟動專案
-`python manage.py runserver`
+```
+python manage.py runserver
+```
 
 🧪 測試帳號
 * Admin: admin/admin
@@ -135,9 +149,20 @@ Features為ChatGPT生成內容，開發中除了基礎功能外，額外學習�
 略
 
 ## 📸 Demo
-略
+註冊
+![註冊](/doc/register.png)
+登入
+![登入](/doc/login.png)
+表單驗證
+![表單驗證](/doc/validation.png)
+Middleware紀錄request IP
+![Middleware紀錄request IP](/doc/middleware.png)
+Log日誌
+![Log日誌](/doc/logging.png)
+Token驗證
+![Token驗證](/doc/api_without_token.png)
 
-🗺 API Documentation
+## 🗺 API Documentation
 | Method | Endpoint                  | Description            | Auth |
 |--------|---------------------------|------------------------|------|
 | POST   | `/api_v1/token/`            | 取得Token               | Yes  |

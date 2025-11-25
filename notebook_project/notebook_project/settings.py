@@ -143,7 +143,7 @@ LOGIN_URL = reverse_lazy("users:login")
 LOGOUT_REDIRECT_URL = reverse_lazy("users:login")
 LOGIN_REDIRECT_URL = reverse_lazy("note:list")
 
-# loggin settings
+# logging settings
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,  # 不要覆蓋 Django 內建的 loggers
