@@ -14,6 +14,10 @@ Features為ChatGPT生成內容，開發中除了基礎功能外，額外學習�
 * DRF-JWT
 * Form error msg
 * Log setting
+* drf-spectacular(2025.11.26)
+
+## 📹 Log
+* 2025.11.26 新增API docs, 優化`note.view`, `note.url`
 
 ## 🚀 Features
 ### 第一階段：建立「個人筆記應用」
@@ -161,16 +165,20 @@ Log日誌
 ![Log日誌](/doc/logging.png)
 Token驗證
 ![Token驗證](/doc/api_without_token.png)
+API doc
+![Swagger API doc](/doc/swagger.png)
 
 ## 🗺 API Documentation
-| Method | Endpoint                  | Description            | Auth |
-|--------|---------------------------|------------------------|------|
-| POST   | `/api_v1/token/`            | 取得Token               | Yes  |
-| POST   | `/api_v1/jwt_token/`        | 取得JWT                 | Yes  |
-| POST   | `/api_v1/jwt_refresh/`      | 取得新access            | Yes  |
-| GET    | `/api/v1/notes/`            | 取得所有備忘錄           | Yes  |
-| POST   | `/api/v1/notes/`            | 建立新備忘錄             | Yes  |
-| GET    | `/api/v1/notes/<int:pk>>/ ` | 取得指定備忘錄資料        | Yes  |
+[Swagger(/api_v1/docs/swagger/)](http://localhost:8000/api_v1/docs/swagger/)
+[Redoc(/api_v1/docs/redoc/)](http://localhost:8000/api_v1/docs/redoc/)
+| Method | Endpoint                    | Description            | Auth |
+|--------|-----------------------------|------------------------|------|
+| POST   | `/api_v1/auth/token/`       | 取得Token               | Yes  |
+| POST   | `/api_v1/auth/jwt_token/`   | 取得JWT                 | Yes  |
+| POST   | `/api_v1/auth/jwt_refresh/` | 取得新access            | Yes  |
+| GET    | `/api_v1/notes/`            | 取得所有備忘錄           | Yes  |
+| POST   | `/api_v1/notes/`            | 建立新備忘錄             | Yes  |
+| GET    | `/api_v1/notes/<int:pk>>/ ` | 取得指定備忘錄資料        | Yes  |
 
 ## 📚 參考資料 References
 略

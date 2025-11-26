@@ -1,37 +1,37 @@
 from django.shortcuts import render
-from rest_framework import generics
-from rest_framework.views import APIView
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.viewsets import GenericViewSet
+from rest_framework.mixins import ListModelMixin, CreateModelMixin, RetrieveModelMixin
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from api_v1.serializers import NoteSeriallzer
+from drf_spectacular.utils import extend_schema
+from api_v1.serializers import NoteSerializer
 from notes.models import Note
 
-class NoteListView(generics.ListAPIView):
-    # 使用JWT Token
-    authentication_classes = [JWTAuthentication]
+class NoteViewSet(ListModelMixin, CreateModelMixin, RetrieveModelMixin, GenericViewSet):
+    queryset = Note.objects.all()
+    serializer_class = NoteSerializer
+
+    authentication_classes = [JWTAuthentication, TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    queryset = Note.objects.all()
-    serializer_class = NoteSeriallzer
 
-class NoteDetailView(generics.RetrieveAPIView):
-    authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
-    permission_classes = [AllowAny]
-    queryset = Note.objects.all()
-    serializer_class = NoteSeriallzer
+    @extend_schema(
+        summary="取得 單一筆 Note詳細內容",
+        description="根據 Note 的主鍵取得詳細資訊",
+    )
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
 
-class NoteCreateView(generics.CreateAPIView):
-    authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
-    permission_classes = [AllowAny]
-    queryset = Note.objects.all()
-    serializer_class = NoteSeriallzer
-
-class NoteRouterView(APIView):
-    def dispatch(self, request, *args, **kwargs):
-        if request.method == "GET":
-            return NoteListView.as_view()(request, *args, **kwargs)
-        if request.method == "POST":
-            return NoteCreateView.as_view()(request, *args, **kwargs)
-        return super().dispatch(request, *args, **kwargs)
+    @extend_schema(
+        summary="取得 Note清單",
+        description="取得 Note清單",
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+    
+    @extend_schema(
+        summary="建立 Note",
+        description="覆蓋 POST 的認證為 AllowAny",
+    )
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)

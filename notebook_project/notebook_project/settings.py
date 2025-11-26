@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
     'rest_framework',           # turn Model to Json
     'rest_framework.authtoken', # token
+    'drf_spectacular',          # API doc
 ]
 
 MIDDLEWARE = [
@@ -188,7 +189,17 @@ LOGGING = {
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",
-    ]
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',   # drf-spectacular
+}
+
+# drf-spectacular settings (It's not necesssary)
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Swagger',
+    'DESCRIPTION': 'Swagger API doc',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
 }
 
 # rest-framework-simple-JWT setting

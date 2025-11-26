@@ -1,6 +1,6 @@
 // 取得token
 async function getToken() {
-    const response = await fetch('/api_v1/token/', {
+    const response = await fetch('/api_v1/auth/token/', {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -52,6 +52,6 @@ async function callNote1WithOutToken() {
 document.addEventListener("DOMContentLoaded", function() {
     const btn = document.getElementById("btn");
     if (btn) {
-        btn.addEventListener("click", callNote1WithOutToken);
+        btn.addEventListener("click", callNote1WithToken);
     }
 });
